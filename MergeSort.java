@@ -1,16 +1,23 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.List;
+import java.util.*;
+
 
 /**
  * Created by cristi on 10/24/15.
+ *
+ * implement merge sort for array of integers
  */
 public class MergeSort {
     public static void main(String[] args) {
-        List<Integer> nums = generateRandomNums();
-        List<Integer> sortedNums = mergeSort(nums);
+        Test t = new Test();
 
-        System.out.println(testSorted(sortedNums) ? "Sorted!" : "Not sorted; try again :(");
+        List<Integer> nums = generateRandomNums();
+        List<Integer> mergeSortedNums = mergeSort(nums);
+
+        Collections.sort(nums);
+
+        t.notOk(nums == mergeSortedNums, "array sorted by internal method is not pointing to same list in memory");
+        t.equal(mergeSortedNums, nums, "sorts array of integers");
+        t.end();
     }
 
     private static List<Integer> generateRandomNums() {
@@ -58,20 +65,9 @@ public class MergeSort {
             }
         }
 
-
         merged.addAll(first.subList(i, first.size()));
         merged.addAll(second.subList(j, second.size()));
 
         return merged;
-    }
-
-    private static Boolean testSorted(List<Integer> arr) {
-        for (int i = 1; i < arr.size(); i++) {
-            if (arr.get(i - 1) > arr.get(i)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

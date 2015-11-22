@@ -1,15 +1,19 @@
 /**
  * Created by cristi on 10/27/15.
+ *
+ * Find the "digital root" of any natural number. The "digital root" is the sum of all digits;
+ * continue adding digits until the sum is a single digit.
  */
 public class DigitalRoot {
     static int testCount = 0;
     static int passingTestCount = 0;
 
     public static void main(String[] args) {
-        testEqual(getDigitalRoot(5), 5);
-        testEqual(getDigitalRoot(27), 9);
-        testEqual(getDigitalRoot(4856), 5);
-        System.out.println(passingTestCount + " of " + testCount + " tests pass");
+        Test t = new Test();
+        t.equal(getDigitalRoot(5), 5, "finds digital root of single-digit number");
+        t.equal(getDigitalRoot(27), 9, "finds digital root of double-digit number");
+        t.equal(getDigitalRoot(4856), 5, "finds digital root of multi-digit number");
+        t.end();
     }
 
     private static int getDigitalRoot(int originalNum) {
@@ -35,13 +39,4 @@ public class DigitalRoot {
         return accumulator;
     }
 
-    private static void testEqual(int testVal, int predictedVal) {
-        testCount += 1;
-        if (testVal == predictedVal) {
-            passingTestCount += 1;
-        }
-        else {
-          System.out.println("Fail: " + testVal + " is equal to " + predictedVal);
-        }
-    }
 }
